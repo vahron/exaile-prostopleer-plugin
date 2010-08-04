@@ -1,4 +1,3 @@
-
 # -*- coding: utf8 -*-
 import gtk, os, urllib, urllib2, cookielib, re
 from xl import trax, common, settings, playlist
@@ -102,6 +101,8 @@ class MyPanel():
                 tracks[0].set_tag_raw('artist', comp[0])
                 tracks[0].set_tag_raw('title', comp[1])
                 tracks[0].set_tag_raw('album', "prostopleer.com")
+                tracks[0].set_tag_raw('prostopleer_title', comp[1])             # теги для корректного отображения русских имен, см. файл __init__.py
+                tracks[0].set_tag_raw('prostopleer_artist', comp[0])
                 play_handle.add_tracks(tracks)
 	else:
             # скачивание выделенных
