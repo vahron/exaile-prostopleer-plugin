@@ -3,7 +3,6 @@ from xl import event
 from gui_part import MyPanel
 import prostopleer_pref
 from xl.nls import gettext as _
-import gtk
 
 FAKEPP = None
 
