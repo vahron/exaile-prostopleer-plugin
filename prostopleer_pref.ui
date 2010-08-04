@@ -7,30 +7,139 @@
       <object class="GtkVBox" id="prefs_pane">
         <property name="visible">True</property>
         <child>
-          <object class="GtkHBox" id="hbox1">
+          <object class="GtkFrame" id="frame1">
             <property name="visible">True</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">in</property>
             <child>
-              <object class="GtkLabel" id="prostopleer/label_url">
+              <object class="GtkAlignment" id="alignment1">
                 <property name="visible">True</property>
-                <property name="yalign">0.47999998927116394</property>
-                <property name="label" translatable="yes">URL &#x432;&#x430;&#x448;&#x435;&#x433;&#x43E; &#x43F;&#x43B;&#x435;&#x435;&#x440;&#x430;:  </property>
+                <property name="left_padding">12</property>
+                <child>
+                  <object class="GtkVBox" id="vbox1">
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkCheckButton" id="prostopleer/useloginpass">
+                        <property name="label" translatable="yes">&#x418;&#x441;&#x43F;&#x43E;&#x43B;&#x44C;&#x437;&#x43E;&#x432;&#x430;&#x442;&#x44C; &#x43B;&#x43E;&#x433;&#x438;&#x43D;-&#x43F;&#x430;&#x440;&#x43E;&#x43B;&#x44C;</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkHBox" id="hbox4">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkHBox" id="hbox5">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkLabel" id="prostopleer/label_login">
+                                <property name="visible">True</property>
+                                <property name="yalign">0.47999998927116394</property>
+                                <property name="label" translatable="yes">&#x41B;&#x43E;&#x433;&#x438;&#x43D;:  </property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkEntry" id="prostopleer/login">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="invisible_char">&#x25CF;</property>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkHBox" id="hbox6">
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkLabel" id="prostopleer/label_password">
+                                <property name="visible">True</property>
+                                <property name="yalign">0.47999998927116394</property>
+                                <property name="label" translatable="yes">    &#x41F;&#x430;&#x440;&#x43E;&#x43B;&#x44C;:  </property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkEntry" id="prostopleer/password">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="visibility">False</property>
+                                <property name="invisible_char">&#x25CF;</property>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkHBox" id="hbox3">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkLabel" id="prostopleer/label_url">
+                            <property name="visible">True</property>
+                            <property name="yalign">0.47999998927116394</property>
+                            <property name="label" translatable="yes">URL &#x432;&#x430;&#x448;&#x435;&#x433;&#x43E; &#x43F;&#x43B;&#x435;&#x435;&#x440;&#x430;:  </property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxEntry" id="prostopleer/url">
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">0</property>
-              </packing>
             </child>
-            <child>
-              <object class="GtkComboBoxEntry" id="prostopleer/url">
+            <child type="label">
+              <object class="GtkLabel" id="prostopleer/label_account">
                 <property name="visible">True</property>
+                <property name="label" translatable="yes">&lt;b&gt;&#x410;&#x43A;&#x43A;&#x430;&#x443;&#x43D;&#x442;&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
               </object>
-              <packing>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -59,8 +168,28 @@
           </object>
           <packing>
             <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="prostopleer/addtops">
+            <property name="label" translatable="yes">&#x414;&#x43E;&#x431;&#x430;&#x432;&#x43B;&#x44F;&#x442;&#x44C; &#x432; &#x441;&#x43F;&#x438;&#x441;&#x43A;&#x438; &#x43F;&#x440;&#x43E;&#x438;&#x437;&#x432;&#x435;&#x434;&#x435;&#x43D;&#x438;&#x44F; &#x445;&#x438;&#x442;-&#x43F;&#x430;&#x440;&#x430;&#x434;&#x44B; &#x440;&#x430;&#x434;&#x438;&#x43E;&#x441;&#x442;&#x430;&#x43D;&#x446;&#x438;&#x439;</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="relief">half</property>
+            <property name="active">True</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
         </child>
       </object>
     </child>

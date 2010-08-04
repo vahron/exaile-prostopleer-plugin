@@ -184,14 +184,21 @@ class MyPanel():
 
         # подключение к ссылке с кукисами
         try:
-            cookieJar = cookielib.CookieJar()
-            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookieJar))
-            self.mypleer = settings.get_option("prostopleer/url", "").strip()
-            if self.mypleer == "":                                  # а задан ли путь
-                req = urllib2.Request('http://prostopleer.com')     # url сервера, просто проверяю доступность
-            else:
-                req = urllib2.Request(self.mypleer)                 # url плеера
-            url_handle = opener.open(req, None, 3)                  # таймаут 3 секунды
+            cj = cookielib.CookieJar()
+            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+            use_login_pass = settings.get_option('prostopleer/useloginpass', False)
+            if use_login_pass:                                          # делаю логин
+                login = settings.get_option("prostopleer/login", "")
+                password = settings.get_option("prostopleer/password", "")
+                data = 'return_url=&login=' + login + '&password=' + password
+                req = urllib2.Request('http://prostopleer.com/login', data)                
+            else:            
+                mypleer = settings.get_option("prostopleer/url", "").strip()
+                if mypleer == "":                                       # а задан ли путь
+                    req = urllib2.Request('http://prostopleer.com')     # url сервера, просто проверяю доступность
+                else:
+                    req = urllib2.Request(mypleer)                      # url плеера
+            url_handle = opener.open(req, None, 3)                      # таймаут 3 секунды
         except:
             err = gtk.MessageDialog(None, 0, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, "Сервер не отвечает, проверьте ваше интернет соединение")
             err.run()
@@ -200,8 +207,10 @@ class MyPanel():
 	    self.cbox.append_text("Обновить")
             return
 
-        # парсю ответ
+        # парсю ответ    
         txt = url_handle.read()                 # хранит ответ
+        if use_login_pass:
+            txt = txt.replace('\\"', '"')
         # поиск доступных списков воспроизведения
         mask_list = re.compile(r'(\<div\ class="[^"]*"\ list_id="[^"]*"\ list_name="(?P<list_name>.*?)"\ style="[^"]*"\>)', re.UNICODE)
         mask_link = re.compile(r'(\<a\ href="\/list(?P<link>.*?)"\ class="[^"]*"\>)', re.UNICODE)
@@ -216,24 +225,26 @@ class MyPanel():
                 self.lists += ['list' + link.groupdict()['link']]
 
         # списки с хитпарадами
-        tops = {
-            "DFM" : 'dfm',
-            "Европа +"      : 'europeplus',
-            "Love Radio"    : 'loveradio',
-            "Relax FM"      : 'relaxfm',
-            "Rock FM"       : 'rockfm',
-            "Наше радио"    : 'nasheradio',
-            "Радио Jazz"    : 'radiojazzfm',
-            "Русское радио" : 'russkoeradio',
-            "Maximum"       : 'maximum',
-            "Шансон"        : 'chanson',
-            "Авторадио"     : 'avtoradio',
-            "Best FM"       : 'bestfm',
-            "Пионер FM"     : 'pioneerfm'
-        }
-        for k,v in tops.iteritems():
-            self.cbox.append_text(k)
-            self.lists += ['top/msk/' + v]
+        add_tops = settings.get_option('prostopleer/addtops', True)
+        if add_tops:
+            tops = {
+                "DFM"           : 'dfm',
+                "Европа +"      : 'europeplus',
+                "Love Radio"    : 'loveradio',
+                "Relax FM"      : 'relaxfm',
+                "Rock FM"       : 'rockfm',
+                "Наше радио"    : 'nasheradio',
+                "Радио Jazz"    : 'radiojazzfm',
+                "Русское радио" : 'russkoeradio',
+                "Maximum"       : 'maximum',
+                "Шансон"        : 'chanson',
+                "Авторадио"     : 'avtoradio',
+                "Best FM"       : 'bestfm',
+                "Пионер FM"     : 'pioneerfm'
+            }
+            for k,v in tops.iteritems():
+                self.cbox.append_text(k)
+                self.lists += ['top/msk/' + v]
 
         # подготовка интерфейса
         self.cbox.append_text("Обновить")
