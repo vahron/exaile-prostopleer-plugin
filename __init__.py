@@ -3,7 +3,7 @@ from xl import event
 from gui_part import MyPanel
 import prostopleer_pref
 
-def get_prefs_pane():
+def get_preferences_pane():
     return prostopleer_pref
 
 def enable(exaile):
