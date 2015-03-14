@@ -96,26 +96,26 @@ class MyPanel():
             # добавление выделенных
             for pos in selection:
                 comp = self.comp[pos[0]]
-                url = 'http://prostopleer.com/download/' + comp[2]
+                url = 'http://pleer.com/download/' + comp[2]
                 tracks = trax.get_tracks_from_uri(url)
                 tracks[0].set_tag_raw('artist', comp[0])
                 tracks[0].set_tag_raw('title', comp[1])
-                tracks[0].set_tag_raw('album', "prostopleer.com")
-                tracks[0].set_tag_raw('prostopleer_title', comp[1])             # теги для корректного отображения русских имен, см. файл __init__.py
-                tracks[0].set_tag_raw('prostopleer_artist', comp[0])
+                tracks[0].set_tag_raw('album', "pleer.com")
+                tracks[0].set_tag_raw('pleer_title', comp[1])             # теги для корректного отображения русских имен, см. файл __init__.py
+                tracks[0].set_tag_raw('pleer_artist', comp[0])
                 play_handle.add_tracks(tracks)
 	else:
             # скачивание выделенных
             for pos in selection:
                 comp = self.comp[pos[0]]
-                path = settings.get_option("prostopleer/path", os.getenv("HOME")).strip()
+                path = settings.get_option("pleer/path", os.getenv("HOME")).strip()
 		if path == "":
-                    settings.set_option("prostopleer/path", os.getenv("HOME"))
+                    settings.set_option("pleer/path", os.getenv("HOME"))
                     path = os.getenv("HOME")
 		elif not os.path.exists(path):
                     os.system("mkdir '%s'" % path)
                     
-		res = os.system('wget -b -P %s -O "%s - %s.mp3" %s -o /dev/null' % (path, comp[0], comp[1], 'http://prostopleer.com/download/' + comp[2]))
+		res = os.system('wget -b -P %s -O "%s - %s.mp3" %s -o /dev/null' % (path, comp[0], comp[1], 'http://pleer.com/download/' + comp[2]))
 
 
     def menu_popup(self, tw, event):                         # вызов контекстного меню
@@ -139,10 +139,10 @@ class MyPanel():
         if search_path == None:
             # составляю запрос
             query = urllib.quote_plus(self.entry.get_text().strip())
-            url = 'http://prostopleer.com/search?q=' + query
+            url = 'http://pleer.com/search?q=' + query
         else:
             # иначе ищу там, где скажут
-            url = 'http://prostopleer.com/' + search_path
+            url = 'http://pleer.com/' + search_path
 
         # отправляю запрос на сервер
 	try:
@@ -156,7 +156,7 @@ class MyPanel():
 
         # парсю ответ
         txt = url_handle.read()
-        if 'http://prostopleer.com/list' == url[0:27]:
+        if 'http://pleer.com/list' == url[0:27]:
             mask = re.compile(r'(\<li\ duration="[^"]*"\ file_id="(?P<file_id>.*?)"\ track_id="[^"]*"\ singer="(?P<singer>.*?)"\ song="(?P<song>.*?)"\ link="[^"]*"\ rate="[^"]*"\ size="[^"]*"\>)', re.UNICODE)
         else:
             mask = re.compile(r'(\<li\ duration="[^"]*"\ file_id="(?P<file_id>.*?)"\ singer="(?P<singer>.*?)"\ song="(?P<song>.*?)"\ link="[^"]*"\ rate="[^"]*"\ size="[^"]*"\>)', re.UNICODE)
@@ -187,16 +187,16 @@ class MyPanel():
         try:
             cj = cookielib.CookieJar()
             opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
-            use_login_pass = settings.get_option('prostopleer/useloginpass', False)
+            use_login_pass = settings.get_option('pleer/useloginpass', False)
             if use_login_pass:                                          # делаю логин
-                login = settings.get_option("prostopleer/login", "")
-                password = settings.get_option("prostopleer/password", "")
+                login = settings.get_option("pleer/login", "")
+                password = settings.get_option("pleer/password", "")
                 data = 'return_url=&login=' + login + '&password=' + password
-                req = urllib2.Request('http://prostopleer.com/login', data)                
+                req = urllib2.Request('http://pleer.com/login', data)                
             else:            
-                mypleer = settings.get_option("prostopleer/url", "").strip()
+                mypleer = settings.get_option("pleer/url", "").strip()
                 if mypleer == "":                                       # а задан ли путь
-                    req = urllib2.Request('http://prostopleer.com')     # url сервера, просто проверяю доступность
+                    req = urllib2.Request('http://pleer.com')     # url сервера, просто проверяю доступность
                 else:
                     req = urllib2.Request(mypleer)                      # url плеера
             url_handle = opener.open(req, None, 3)                      # таймаут 3 секунды
@@ -226,7 +226,7 @@ class MyPanel():
                 self.lists += ['list' + link.groupdict()['link']]
 
         # списки с хитпарадами
-        add_tops = settings.get_option('prostopleer/addtops', True)
+        add_tops = settings.get_option('pleer/addtops', True)
         if add_tops:
             tops = {
                 "DFM"           : 'dfm',
