@@ -51,13 +51,13 @@ class ExaileFakePP(object):
         
     def on_tags_parsed(self, type, player, args):
         track = player.current
-        if track.get_tag_raw('__loc').startswith('http://prostopleer.com/'):
-            if not track.get_tag_raw('prostopleer_title'):          # а есть ли сохраненные теги?
+        if track.get_tag_raw('__loc').startswith('http://pleer.com/'):
+            if not track.get_tag_raw('pleer_title'):          # а есть ли сохраненные теги?
                 title = convert(track.get_tag_raw('title', join = True))
                 artist = convert(track.get_tag_raw('artist', join = True))
             else:
-                title = track.get_tag_raw('prostopleer_title')
-                artist = track.get_tag_raw('prostopleer_artist')
+                title = track.get_tag_raw('pleer_title')
+                artist = track.get_tag_raw('pleer_artist')
             album = convert(track.get_tag_raw('album', join = True))
             track.set_tag_raw('title', title)
             track.set_tag_raw('artist', artist)
