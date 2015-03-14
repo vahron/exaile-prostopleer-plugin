@@ -9,24 +9,24 @@ ui = os.path.join(basedir, "prostopleer_pref.ui")
 
 class Use_login_passPreference(widgets.CheckPreference):
     default = False
-    name = 'prostopleer/useloginpass'
+    name = 'pleer/useloginpass'
 
 class AddtopsPreference(widgets.CheckPreference):
     default = True
-    name = 'prostopleer/addtops'
+    name = 'pleer/addtops'
 
 class PPLoginPreference(widgets.Preference):
-    name = 'prostopleer/login'
+    name = 'pleer/login'
 
 class PPPasswordPreference(widgets.Preference):
-    name = 'prostopleer/password'
+    name = 'pleer/password'
 
 class URLPreference(widgets.ComboEntryPreference):
-    name = 'prostopleer/url'
+    name = 'pleer/url'
     preset_items = [""]
     default = ""
 	
 class PathPreference(widgets.ComboEntryPreference):
-    name = 'prostopleer/path'
+    name = 'pleer/path'
     preset_items = ["%s/" % os.getenv("HOME")]
     default = "%s/" % os.getenv("HOME")
