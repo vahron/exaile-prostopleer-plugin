@@ -51,7 +51,7 @@ class ExaileFakePP(object):
         
     def on_tags_parsed(self, type, player, args):
         track = player.current
-        if track.get_tag_raw('__loc').startswith('http://prostopleer.com/'):
+        if track.get_tag_raw('__loc').startswith('http://pleer.com/'):
             if not track.get_tag_raw('prostopleer_title'):          # а есть ли сохраненные теги?
                 title = convert(track.get_tag_raw('title', join = True))
                 artist = convert(track.get_tag_raw('artist', join = True))
